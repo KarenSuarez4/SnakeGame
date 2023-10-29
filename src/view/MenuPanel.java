@@ -21,10 +21,10 @@ public class MenuPanel extends JPanel {
 	private CustomFont customFont;
 
 	public MenuPanel(ActionListener listener) {
-		setBackground(Color.ORANGE);
-		setPreferredSize(new Dimension(814, 591));
-		setLayout(null);
-		initComponent(listener);
+		this.setBackground(Color.ORANGE);
+		this.setPreferredSize(new Dimension(814, 591));
+		this.setLayout(null);
+		this.initComponent(listener);
 	}
 	
 	public void initComponent(ActionListener listener) {	

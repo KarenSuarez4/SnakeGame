@@ -2,6 +2,8 @@ package view;
 
 import java.awt.CardLayout;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -19,15 +21,14 @@ public class MyFrame extends JFrame {
 	private JPanel cardLayout;
 	private CardLayout card;
 	
-
 	public MyFrame(ActionListener listener) {
 		super("Snake Game");
 		this.setSize(830, 630);
 		this.setLocationRelativeTo(this);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setResizable(false);
-		getContentPane().setLayout(null);
-		this.initComponent(listener);	
+		this.getContentPane().setLayout(null);
+		this.initComponent(listener);
 		this.setVisible(true);
 	}
 	
@@ -65,10 +66,16 @@ public class MyFrame extends JFrame {
 	}
 	
 	public void showGamePanel(){
+		this.setFocusable(true);
 		card.show(cardLayout, GAMEPANEL);
 	}
 	
 	public void showMenuPanel(){
 		card.show(cardLayout, MENU);
 	}
+	
+	public void moveSnake(int move) {
+		gamePanel.moveSnake(move);
+	}
+	
 }
