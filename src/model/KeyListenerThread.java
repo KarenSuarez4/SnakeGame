@@ -10,7 +10,7 @@ public class KeyListenerThread extends Thread implements KeyListener {
 	
 	public KeyListenerThread(JFrame myFrame) {
 		myFrame.addKeyListener(this);
-		keyCode = 38;
+		keyCode = 39;
 	}
 	
 	@Override

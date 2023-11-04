@@ -7,9 +7,11 @@ import java.awt.event.ActionListener;
 import javax.swing.JPanel;
 
 import view.MyComponents.MyButton;
+import javax.swing.JLabel;
 
 public class GamePanel extends JPanel {
 	private SnakeGamePanel snakeGamePanel;
+	private JLabel secondScoreJLabel;
 
 	public GamePanel(ActionListener listener) {
 		this.setBackground(Color.LIGHT_GRAY);
@@ -29,10 +31,31 @@ public class GamePanel extends JPanel {
 		backButton.addActionListener(listener);
 		backButton.setFocusable(false);
 		add(backButton);
+		
+		secondScoreJLabel = new JLabel("");
+		secondScoreJLabel.setBounds(354, 46, 46, 14);
+		add(secondScoreJLabel);
 	
 	}
 	
-	public void moveSnake(int move) {
-		snakeGamePanel.moveSnake(move);
+	public void secondsScore(int secondScore) {
+		secondScoreJLabel.setText(Integer.toString(secondScore));
+		secondScoreJLabel.repaint();
+	}
+	
+	public boolean flagFinishGame(){
+		return snakeGamePanel.getFlag();
+	}
+	
+	public void moveSquartSnake(double xSnake, double ySnake) {
+		snakeGamePanel.moveSquartSnake(xSnake, ySnake);
+	}
+	
+	public void changePositionObstacle(int xObstacle, int yObstacle) {
+		snakeGamePanel.changePositionObstacle(xObstacle, yObstacle);
+	}
+	
+	public void changePositionFood(int xFood, int yFood) {
+		snakeGamePanel.changePositionFood(xFood, yFood);
 	}
 }

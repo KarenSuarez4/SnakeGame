@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import javax.management.loading.PrivateClassLoader;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -14,6 +15,7 @@ public class MyFrame extends JFrame {
 	private final static String MENU = "menu";
 	private final static String SCORE = "score";
 	private final static String GAMEPANEL = "gamePanel";
+	private Exeption messageJDialog;
 	private MenuPanel menuPanel;
 	private ScorePanel scorePanel;
 	private CreatorInformation creatorInformation;
@@ -57,6 +59,11 @@ public class MyFrame extends JFrame {
 		card = (CardLayout)(cardLayout.getLayout());
 	}
 	
+	public void secondsScore(int secondScore) {
+		gamePanel.secondsScore(secondScore);
+		
+	}
+	
 	public void showCreatorInformation(){
 		card.show(cardLayout, CREATORINFORMATION);
 	}
@@ -74,8 +81,24 @@ public class MyFrame extends JFrame {
 		card.show(cardLayout, MENU);
 	}
 	
-	public void moveSnake(int move) {
-		gamePanel.moveSnake(move);
+	public void moveSquartSnake(double xSnake, double ySnake) {
+		gamePanel.moveSquartSnake(xSnake, ySnake);
+	}
+	
+	public void changePositionObstacle(int xObstacle, int yObstacle) {
+		gamePanel.changePositionObstacle(xObstacle, yObstacle);
+	}
+	
+	public void changePositionFood(int xFood, int yFood) {
+		gamePanel.changePositionFood(xFood, yFood);
+	}
+	
+	public boolean flagFinishGame(){
+		if (gamePanel.flagFinishGame() == false) {
+			messageJDialog = new Exeption("PERDISTE :(", "resources/JDialog/caution.png");
+		}
+		
+		return gamePanel.flagFinishGame();
 	}
 	
 }
