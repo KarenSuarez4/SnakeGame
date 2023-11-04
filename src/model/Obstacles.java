@@ -22,7 +22,7 @@ public class Obstacles extends Thread {
             changePositionObstacle();
 			flag = presenter.flagFinishGame();
 			try {
-				Thread.sleep(100000);
+				Thread.sleep(5000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
