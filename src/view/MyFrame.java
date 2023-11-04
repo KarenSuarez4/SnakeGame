@@ -64,6 +64,10 @@ public class MyFrame extends JFrame {
 		
 	}
 	
+	public void setScore() {
+		gamePanel.setScore();
+	}
+	
 	public void showCreatorInformation(){
 		card.show(cardLayout, CREATORINFORMATION);
 	}

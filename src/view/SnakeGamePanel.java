@@ -21,6 +21,7 @@ public class SnakeGamePanel extends JPanel{
 	private double xSnake;
 	private double ySnake;
 	private boolean flag;
+	private int foodScore;
 	private JLabel obstacleJLabel;
 	private JLabel foodJLabel;
 	private JLabel snakeBody;
@@ -47,8 +48,8 @@ public class SnakeGamePanel extends JPanel{
 		add(foodJLabel);
 		
 		snakeBody = new JLabel();
-		snakeBody.setBounds(434, 367, 40, 40); 
-		this.setImageLabel(snakeBody, "resources/mouseFood.png");
+		snakeBody.setBounds(434, 367, 30, 30); 
+		this.setImageLabel(snakeBody, "resources/texSnake2.png");
 		add(snakeBody);
 		
 		snake = new Vector<JLabel>();
@@ -64,7 +65,8 @@ public class SnakeGamePanel extends JPanel{
 	    }
 	    
 	    if (snakeBody.getBounds().intersects(foodJLabel.getBounds())) {
-	        System.out.println("COMIDAAAAAAA!");
+	        changeFoodScore();
+	        foodScore++;
 	        snakeGrowth();
 	    }
 	    if ((this.xSnake) >= getWidth()) {
@@ -95,7 +97,13 @@ public class SnakeGamePanel extends JPanel{
 	}
 	
 	public void changePositionFood(int xFood, int yFood) {
-		foodJLabel.setLocation(xFood, yFood);
+		for (int i = 1 ; i < snake.size(); i++) {
+	    	if(snake.get(i).getX() != xFood & snake.get(i).getY() != yFood) {
+	    		foodJLabel.setLocation(xFood, yFood);
+	    	} else {
+	    		changeFoodScore();
+	    	}
+	    }
 		repaint();
 	}
 
@@ -110,30 +118,26 @@ public class SnakeGamePanel extends JPanel{
 	    JLabel newBodyPart = createBody();
 	    snake.add(newBodyPart);
 	}
+	
+	
+	public void changeFoodScore() {
+		foodJLabel.setLocation((int) (10 + Math.random() * (720 - 10 + 1)), (int) (10 + Math.random() * (420 - 10 + 1)));
+	}
 
 	private JLabel createBody() {
 	    JLabel bodyPart = new JLabel();
-	    bodyPart.setBounds((int)xSnake, (int)ySnake, 40, 40);
-	    setImageLabel(bodyPart, "resources/mouseFood.png");
+	    bodyPart.setBounds((int)xSnake, (int)ySnake, 30, 30);
+	    setImageLabel(bodyPart, "resources/texSnake1.png");
 	    add(bodyPart);
 	    return bodyPart;
 	}
 
-	@Override
-	protected void paintComponent(Graphics g) {
-	    super.paintComponent(g);
-	    Graphics2D g2d = (Graphics2D) g;
-	    g2d.setColor(Color.BLACK);
-	    
-	    snake.get(0).setLocation((int) xSnake, (int) ySnake);   
-	    
-	    for (int i = 5; i < snake.size(); i++) {
-	    	if (snake.get(0).getBounds().intersects(snake.get(i).getBounds())) {
-	    		flag = false;
-	    		break;
-	    	}
-	    }
-	    
+	public int getFoodScore() {
+		return foodScore;
+	}
+	
+	public void setFoodScore(int foodScore) {
+		this.foodScore = foodScore;
 	}
 	
 	public boolean getFlag() {
@@ -143,6 +147,25 @@ public class SnakeGamePanel extends JPanel{
 	public void setFlag(boolean flag) {
 		this.flag = flag;
 	}
+	
+	@Override
+	protected void paintComponent(Graphics g) {
+	    super.paintComponent(g);
+	    Graphics2D g2d = (Graphics2D) g;
+	    g2d.setColor(Color.BLACK);
+	    
+	    snake.get(0).setLocation((int) xSnake, (int) ySnake);   
+	    
+	    for (int i = 3; i < snake.size(); i++) {
+	    	if (snake.get(0).getBounds().intersects(snake.get(i).getBounds())) {
+	    		flag = false;
+	    		break;
+	    	}
+	    }
+	    
+	}
+	
+	
 	 
 	
 }

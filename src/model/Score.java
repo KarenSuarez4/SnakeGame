@@ -27,7 +27,8 @@ public class Score extends Thread{
 					presenter.changeTimeScore(timeSecondsScore);
 				}
 				
-				
+				presenter.setScore();
+				flag = presenter.flagFinishGame();
 
 			} catch (InterruptedException e) {
 				e.printStackTrace();

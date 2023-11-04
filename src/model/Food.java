@@ -16,21 +16,24 @@ public class Food extends Thread {
 	@Override
 	public void run() {
 		do {
-
 			xFood = (int) (10 + Math.random() * (720 - 10 + 1));  
         	yFood = (int) (10 + Math.random() * (420 - 10 + 1));  
-            changePositionObstacle();
+        	
+        	changePositionFood();
+            
+            try {
+            	Thread.sleep(6000);
+   			} catch (InterruptedException e) {
+   				e.printStackTrace();
+   			}
+             
+            
 			flag = presenter.flagFinishGame();
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
 			
 		}while(flag == true);
 	}
 	
-	public void changePositionObstacle() {
+	public void changePositionFood() {
 		presenter.changePositionFood(xFood, yFood);
 	}
 	

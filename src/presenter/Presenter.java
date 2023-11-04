@@ -64,7 +64,10 @@ public class Presenter implements ActionListener{
 
 	public void moveSquartSnake(double xSnake, double ySnake) {
 		myFrame.moveSquartSnake(xSnake, ySnake);
-		myFrame.flagFinishGame();
+	}
+	
+	public void setScore() {
+		myFrame.setScore();
 	}
 	
 	public void changeTimeScore(int secondsScore) {
