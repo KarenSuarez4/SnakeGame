@@ -19,6 +19,8 @@ import java.awt.Font;
 public class MenuPanel extends JPanel {
 	private JLabel background;
 	private CustomFont customFont;
+	private JLabel infName;
+	private MyJTextField namePlayer;
 
 	public MenuPanel(ActionListener listener) {
 		this.setBackground(Color.ORANGE);
@@ -46,11 +48,11 @@ public class MenuPanel extends JPanel {
 		infButton.setActionCommand("creatorInformationMenu");
 		add(infButton);
 		
-		MyJTextField namePlayer = new MyJTextField();
+		namePlayer = new MyJTextField();
 		namePlayer.setBounds(473, 495, 222, 34);
 		add(namePlayer);
 		
-		JLabel infName = new JLabel("Nombre del jugador:");
+		infName = new JLabel("Nombre del jugador:");
 		infName.setFont(new Font("balloons", Font.PLAIN, 17));
 		infName.setForeground(Color.WHITE);
 		infName.setBounds(487, 471, 193, 23);
@@ -63,6 +65,10 @@ public class MenuPanel extends JPanel {
 		
 		
 		
+	}
+	
+	public String infName() {
+		return namePlayer.getText();
 	}
 	
 	private void setImageLabel(JLabel labelName, String root) {

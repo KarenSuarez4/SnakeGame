@@ -25,9 +25,13 @@ public class Exeption extends JDialog {
 	private CustomFont customFont;
 	
 	public Exeption(String messageInf, String url) {
-		this.setTitle("CAUTION");
 		this.setLayout(null);
 		this.setSize(450,170);
+		
+		this.setUndecorated(false);
+		this.getContentPane().setBackground(new Color(0, 0, 0, 100));
+		
+		
 		this.setLocationRelativeTo(this);
 		this.getContentPane().setBackground(Color.WHITE);
 		this.setIconImage(new ImageIcon("resources/Images/Header/LogoTittle.png").getImage());
