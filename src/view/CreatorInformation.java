@@ -101,7 +101,7 @@ public class CreatorInformation extends JPanel {
 		infYearLabel_1.setBounds(286, 336, 108, 29);
 		add(infYearLabel_1);
 		
-		JLabel infCourseLabel_1 = new JLabel("Course: ");
+		JLabel infCourseLabel_1 = new JLabel("Semestre 4");
 		infCourseLabel_1.setForeground(Color.WHITE);
 		infCourseLabel_1.setFont(new Font("balloons", Font.PLAIN, 25));
 		infCourseLabel_1.setBounds(286, 376, 108, 29);
