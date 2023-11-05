@@ -58,6 +58,11 @@ public class MenuPanel extends JPanel {
 		infName.setBounds(487, 471, 193, 23);
 		add(infName);
 		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setBounds(458, 76, 251, 98);
+		this.setImageLabel(lblNewLabel, "resources/titleGame.png");
+		add(lblNewLabel);
+		
 		background = new JLabel("");
 		background.setBounds(0,0,814,591);
 		this.setImageLabel(background, "resources/BackgroundMenu.png");
