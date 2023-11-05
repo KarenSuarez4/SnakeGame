@@ -4,10 +4,13 @@ import java.awt.CardLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
 
 import javax.management.loading.PrivateClassLoader;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
+import model.User;
 
 
 public class MyFrame extends JFrame {
@@ -15,11 +18,12 @@ public class MyFrame extends JFrame {
 	private final static String MENU = "menu";
 	private final static String SCORE = "score";
 	private final static String GAMEPANEL = "gamePanel";
-	private Exeption messageJDialog;
+	private final static String LEVELS = "levels";
 	private MenuPanel menuPanel;
 	private ScorePanel scorePanel;
 	private CreatorInformation creatorInformation;
 	private GamePanel gamePanel;
+	private Levels levels;
 	private JPanel cardLayout;
 	private CardLayout card;
 	
@@ -47,6 +51,9 @@ public class MyFrame extends JFrame {
 		gamePanel = new GamePanel(listener);
 		gamePanel.setBounds(0, 0, 814, 591);
 		
+		levels = new Levels(listener);
+		levels.setBounds(0, 0, 814, 591);
+		
 		cardLayout = new JPanel();
 		cardLayout.setLayout(new CardLayout());
 		cardLayout.setBounds(0,0,this.getWidth(), this.getHeight());
@@ -54,18 +61,42 @@ public class MyFrame extends JFrame {
 		cardLayout.add(creatorInformation, CREATORINFORMATION);
 		cardLayout.add(scorePanel, SCORE);
 		cardLayout.add(gamePanel, GAMEPANEL);
+		cardLayout.add(levels, LEVELS);
 		getContentPane().add(cardLayout);
 		
 		card = (CardLayout)(cardLayout.getLayout());
 	}
 	
+	public void setScoreTable(ArrayList<User> userList) {
+		scorePanel.setInformationModel(userList);
+	}
+	
+	public String infName() {
+		return menuPanel.infName();
+	}
+	
+	public void start() {
+		gamePanel.start();
+	}
+	
+	public void createInitialSnake(int sizeSnake) {
+		gamePanel.createInitialSnake(sizeSnake);
+	}
+	
 	public void secondsScore(int secondScore) {
 		gamePanel.secondsScore(secondScore);
-		
+	}
+	
+	public int getValueScore() {
+		return gamePanel.getValueScore();
 	}
 	
 	public void setScore() {
 		gamePanel.setScore();
+	}
+	
+	public void showLevels(){
+		card.show(cardLayout, LEVELS);
 	}
 	
 	public void showCreatorInformation(){
@@ -98,10 +129,6 @@ public class MyFrame extends JFrame {
 	}
 	
 	public boolean flagFinishGame(){
-		if (gamePanel.flagFinishGame() == false) {
-			messageJDialog = new Exeption("PERDISTE :(", "resources/JDialog/caution.png");
-		}
-		
 		return gamePanel.flagFinishGame();
 	}
 	

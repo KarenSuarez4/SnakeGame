@@ -27,7 +27,7 @@ public class SnakeGamePanel extends JPanel{
 	private JLabel snakeBody;
 	
 	public SnakeGamePanel(ActionListener listener) {
-		this.setBackground(new Color(245, 245, 220));
+		this.setBackground(new Color(247, 215, 247));
 		this.setPreferredSize(new Dimension(814, 591));
 		this.setLayout(null);
 		this.xSnake = 100;
@@ -54,51 +54,44 @@ public class SnakeGamePanel extends JPanel{
 		
 		snake = new Vector<JLabel>();
 		snake.add(snakeBody);
-		snake.add(createBody());
+	}
+
+	public void start() {
+		for (JLabel jLabel : snake) {
+			this.remove(jLabel);
+		}
+		snake.removeAll(snake);
+		snakeBody = new JLabel();
+		snakeBody.setBounds(434, 367, 30, 30); 
+		this.setImageLabel(snakeBody, "resources/texSnake2.png");
+		add(snakeBody);
+		snake.add(snakeBody);
+		flag=true;
+		
+		revalidate();
+		repaint();
 	}
 	
-	
-
-	public void moveSquartSnake(double xSnake, double ySnake) {
-	    if (snakeBody.getBounds().intersects(obstacleJLabel.getBounds())) {
-	        flag = false;
-	    }
-	    
-	    if (snakeBody.getBounds().intersects(foodJLabel.getBounds())) {
-	        changeFoodScore();
-	        foodScore++;
-	        snakeGrowth();
-	    }
-	    if ((this.xSnake) >= getWidth()) {
-	        this.xSnake = 0;
-	    }
-	    if ((this.xSnake + 40) <= 0) {
-	        this.xSnake = getWidth();
-	    }
-	    if ((this.ySnake) >= getHeight()) {
-	        this.ySnake = 0;
-	    }
-	    if ((this.ySnake + 40) <= 0) {
-	        this.ySnake = getHeight();
-	    }
-	    
-	    for (int i = 1 ; i < snake.size(); i++) {
-	    	snake.get(snake.size()-i).setLocation(snake.get(snake.size()-(i+1)).getX(), snake.get(snake.size()-(i+1)).getY());
-	    }
-	    
-	    this.xSnake += xSnake;
-	    this.ySnake += ySnake;
-	    repaint();
+	public void createInitialSnake(int intialSizeSnake) {
+		for(int i = 0; i <= intialSizeSnake ; i++ ) {
+			snakeGrowth();
+		}
 	}
 	
 	public void changePositionObstacle(int xObstacle, int yObstacle) {
-		obstacleJLabel.setLocation(xObstacle, yObstacle);
+		for (int i = 1 ; i < snake.size(); i++) {
+	    	if(snake.get(i).getX() != xObstacle & snake.get(i).getY() != yObstacle & foodJLabel.getBounds().x != xObstacle & foodJLabel.getBounds().y != yObstacle) {
+	    		obstacleJLabel.setLocation(xObstacle, yObstacle);
+	    	}else {
+	    		changeObstaclesScore();
+	    	}
+	    }
 		repaint();
 	}
 	
 	public void changePositionFood(int xFood, int yFood) {
 		for (int i = 1 ; i < snake.size(); i++) {
-	    	if(snake.get(i).getX() != xFood & snake.get(i).getY() != yFood) {
+	    	if(snake.get(i).getX() != xFood & snake.get(i).getY() != yFood & obstacleJLabel.getBounds().x != xFood & obstacleJLabel.getBounds().y != yFood) {
 	    		foodJLabel.setLocation(xFood, yFood);
 	    	} else {
 	    		changeFoodScore();
@@ -121,7 +114,11 @@ public class SnakeGamePanel extends JPanel{
 	
 	
 	public void changeFoodScore() {
-		foodJLabel.setLocation((int) (10 + Math.random() * (720 - 10 + 1)), (int) (10 + Math.random() * (420 - 10 + 1)));
+		foodJLabel.setLocation((int) (10 + Math.random() * (700 - 10 + 1)), (int) (10 + Math.random() * (400 - 10 + 1)));
+	}
+	
+	public void changeObstaclesScore() {
+		obstacleJLabel.setLocation((int) (10 + Math.random() * (700 - 10 + 1)), (int) (10 + Math.random() * (400 - 10 + 1)));
 	}
 
 	private JLabel createBody() {
@@ -130,6 +127,39 @@ public class SnakeGamePanel extends JPanel{
 	    setImageLabel(bodyPart, "resources/texSnake1.png");
 	    add(bodyPart);
 	    return bodyPart;
+	}
+	
+	public void moveSquartSnake(double xSnake, double ySnake) {
+	    if (snakeBody.getBounds().intersects(obstacleJLabel.getBounds())) {
+	        flag = false;
+	    }
+	    
+	    if (snakeBody.getBounds().intersects(foodJLabel.getBounds())) {
+	        changeFoodScore();
+	        snakeGrowth();
+	        foodScore++;
+	        
+	    }
+	    if ((this.xSnake) >= getWidth()) {
+	        this.xSnake = 0;
+	    }
+	    if ((this.xSnake + 40) <= 0) {
+	        this.xSnake = getWidth();
+	    }
+	    if ((this.ySnake) >= getHeight()) {
+	        this.ySnake = 0;
+	    }
+	    if ((this.ySnake + 40) <= 0) {
+	        this.ySnake = getHeight();
+	    }
+	    
+	    for (int i = 1 ; i < snake.size(); i++) {
+	    	snake.get(snake.size()-i).setLocation(snake.get(snake.size()-(i+1)).getX(), snake.get(snake.size()-(i+1)).getY());
+	    }
+	      
+	    this.xSnake += xSnake;
+	    this.ySnake += ySnake;
+	    repaint();
 	}
 
 	public int getFoodScore() {
@@ -156,7 +186,7 @@ public class SnakeGamePanel extends JPanel{
 	    
 	    snake.get(0).setLocation((int) xSnake, (int) ySnake);   
 	    
-	    for (int i = 3; i < snake.size(); i++) {
+	    for (int i = 8; i < snake.size(); i++) {
 	    	if (snake.get(0).getBounds().intersects(snake.get(i).getBounds())) {
 	    		flag = false;
 	    		break;

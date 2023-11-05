@@ -1,7 +1,5 @@
 package model;
 
-import javax.swing.JFrame;
-
 import presenter.Presenter;
 
 public class Score extends Thread{
@@ -21,20 +19,26 @@ public class Score extends Thread{
 			try {
 				Thread.sleep(100);
 				timeScore++;
-				
 				if (timeScore%10 == 0) {
 					timeSecondsScore++;
 					presenter.changeTimeScore(timeSecondsScore);
 				}
-				
 				presenter.setScore();
+				
 				flag = presenter.flagFinishGame();
-
+				
+				if (flag) {
+					flag = presenter.getFlagBack();
+				}
+				
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 
 		}while(flag == true);
+		
+		presenter.writeScore();
+		
 	}
 
 
