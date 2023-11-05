@@ -136,7 +136,7 @@ public class Presenter implements ActionListener{
 	}
 	
 	public void showEnd() {
-		exeption = new Exeption("PERDISTE :(", "resources/JDialog/caution.png");
+		exeption = new Exeption("PERDISTE :(", "resources/sadIcon.png");
 	}
 	
 	public int getValueScore() {

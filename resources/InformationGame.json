@@ -2,19 +2,19 @@
 	{
         "sizeSnakeInitial": 0,
 		"speedMovement": 250,
-		"timeObstacles": 2000,
+		"timeObstacles": 5000,
         "timeFood": 6000 
 	},
 	{
         "sizeSnakeInitial": 1,
 		"speedMovement": 170,
-		"timeObstacles": 2000,
-        "timeFood": 6000 
+		"timeObstacles": 3000,
+        "timeFood": 3000 
 	},
 	{
         "sizeSnakeInitial": 2,
 		"speedMovement": 110,
 		"timeObstacles": 2000,
-        "timeFood": 6000 
+        "timeFood": 2000 
 	}
 ]
